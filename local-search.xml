@@ -65,6 +65,20 @@
     <content type="html"><![CDATA[<p><strong>摘要：</strong></p><p>Linux文件和用户系统学习，B站链接：<a href="https://www.bilibili.com/video/BV1pz4y1D73n?p=6">https://www.bilibili.com/video/BV1pz4y1D73n?p=6</a> 。</p><p>更详细可以参看：<a href="https://blog.csdn.net/liu17234050/article/details/108947343">https://blog.csdn.net/liu17234050/article/details/108947343</a> 。</p><hr><a id="more"></a><h2 id="Linux目录结构图"><a href="#Linux目录结构图" class="headerlink" title="Linux目录结构图"></a>Linux目录结构图</h2><p><img src="https://i.loli.net/2020/11/24/sTuxED79HRvN3L5.png" alt="linux目录结构"></p><h2 id="Linux系统的文件类型"><a href="#Linux系统的文件类型" class="headerlink" title="Linux系统的文件类型"></a>Linux系统的文件类型</h2><p>​    Linux 中一切皆为文件，文件类型也有多种，使用 <strong>ls -l</strong>（简写为<strong>ll</strong>） 命令可以查看文件的属性，所显示结果的第一列的第一个字符用来表明该文件的文件类型，如下：</p><p><img src="https://i.loli.net/2020/11/25/Nxb921cHLXaGQzy.png" alt="image-20201125132216443"></p><p><strong>常见文件类型</strong></p><p>使用 ls -l 命令后，第一列第一个字符为 “-“ 的文件为普通文件，如上图所示，普通文件一般为灰色字体，绿色字体的是可执行文件，红色字体的是压缩文件。第一个字符为 “d” 的文件为文件夹。</p><p><strong>非常见类型</strong></p><p>b 设备文件（块设备）储存设备，硬盘，/dev/sda，/dev/sda1</p><p>c 设备文件（字符设备）打印机，终端，/dev/tty1</p><p>i 链接文件（淡蓝色）</p><p>s 套接字文件</p><p>p 管道文件</p><h3 id="文件的权限："><a href="#文件的权限：" class="headerlink" title="文件的权限："></a>文件的权限：</h3><p>　　以普通文件为例，使用 ls -l 命令，可以看到第一个字符 “-“ ，表示这个文件为普通文件，它也可以是其他的字符，不同的字符代表不同类型的文件。其后的一串字符表明了该文件的权限，其中：</p><p>1）r 表明该文件具有可读权限，若该位置为 “-“ ，则表明文件不可读；</p><p>2）w 表明该文件具有写权限，若该位置为 “-“ ，则表明文件不可写；</p><p>3）x 表明该文件具有可执行权限，若该位置为 “-“ ，则表明文件不具有可执行权限；</p><p>4）第一个 rwx 表示该文件的所有者对该文件的权限；第二个 rwx 表示该文件所属组对该文件的权限；第三个 rwx 表示其他用户对该文件的权限。</p><h2 id="文件命令"><a href="#文件命令" class="headerlink" title="文件命令"></a>文件命令</h2><ol><li><p><strong>切换目录 cd</strong></p><p><strong>cd</strong>    绝对路径或相对路径</p><p>cd    绝对路径    cd /home/aaa</p><p>cd    相对路径    cd ..</p></li><li><p><strong>列出目录内容 ls</strong> </p><p><strong>ls</strong>    路径名 </p><p>ls    /home</p><p><strong>pwd</strong>    显示当前路径</p></li><li><p><strong>创建文件 touch</strong></p><p><strong>touch</strong>    文件路径/文件名称</p><p>touch    /home/aaa/a.txt    //创建a.txt</p></li><li><p><strong>创建目录 mkdir</strong></p><p><strong>mkdir</strong>    文件路径/文件名称</p><p>mkdir    ./bbb</p><p>mkdir    -p     ./aaa/bbb    //创建多层目录</p></li><li><p><strong>复制 cp</strong></p><p><strong>cp</strong>    原文件路径    目标文件夹</p><p>cp    aaa.txt    ./aaa/bbb</p><p>cp    -r    aaa    bbb    //递归复制，如果aaa文件夹里面还有文件夹，需要使用选项<code>-r</code>进行复制</p></li><li><p><strong>移动 mv</strong></p><p><strong>mv</strong>    原文件路径    目标文件夹</p><p>mv     ./aaa/bbb/aaa.txt    ./aaa</p></li><li><p><strong>删除 rm</strong></p><p><strong>rm</strong>    -rf    文件或目录的路径</p><p>rm    -rf    aaa/*</p></li><li><p><strong>查看文件内容 cat</strong></p><p>cat    查看文件全部内容，在终端打印</p><p>more    以显示一页的形式在终端打印内容，只能向后翻页文件</p><p>less    以显示一页的形式在终端打印内容，可以向前和向后翻页文件</p><p>head    从文件开头显示内容，增加选项<code>-n</code>可以指定显示的行数，<code>n</code>为数字，指显示的行数</p><p>tail    从文件末尾显示内容，增加选项<code>-n</code>可以指定显示的行数，<code>n</code>为数字，指显示的行数</p><p>grep    指定的查找模式搜索文件（对文件内容过滤），通知用户在什么文件中搜索到与指定的模式匹配的字            符串，并且打印出所有包含该字符串的文本行，该文本行的最前面是该行所在的文件名</p><p>​            grep    ‘abc’    /root/a.txt        //在a.txt中查找abc出现的地方</p></li></ol>]]></content>
     
     
+    <categories>
+      
+      <category>Linux学习</category>
+      
+      <category>Linux文件系统</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
     
   </entry>
   
