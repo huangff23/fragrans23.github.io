@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="huangff23">
   <meta name="keywords" content="java web">
-  <title>Nginx的安装 - huangff23的博客</title>
+  <title>Docker基本使用 - huangff23的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2020-11-23 11:48" pubdate>
-        2020年11月23日 中午
+      <time datetime="2020-11-30 21:25" pubdate>
+        2020年11月30日 晚上
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      622 字
+      654 字
     </span>
   
 
@@ -208,66 +208,186 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">Nginx的安装</h1>
+            <h1 style="display: none">Docker基本使用</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>CentOS安装Nginx，文章在<a target="_blank" rel="noopener" href="https://www.cnblogs.com/liujuncm5/p/6713784.html">https://www.cnblogs.com/liujuncm5/p/6713784.html</a> 之上修改。</p>
+              <p>Linux安装Docker及Docker基本使用，B站链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1sK4y1s7Cj?p=15">https://www.bilibili.com/video/BV1sK4y1s7Cj?p=15</a> 。</p>
 <a id="more"></a>
 
-<h2 id="一-gcc-安装"><a href="#一-gcc-安装" class="headerlink" title="一. gcc 安装"></a><strong>一. gcc 安装</strong></h2><p>安装 nginx 需要先将官网下载的源码进行编译，编译依赖 gcc 环境，如果没有 gcc 环境，则需要安装：</p>
-<pre><code class="hljs shell">yum install gcc-c++</code></pre>
+<h3 id="一-Docker的基本操作"><a href="#一-Docker的基本操作" class="headerlink" title="一.Docker的基本操作"></a>一.Docker的基本操作</h3><h4 id="1-1-安装Docker"><a href="#1-1-安装Docker" class="headerlink" title="1.1 安装Docker"></a>1.1 安装Docker</h4><pre><code class="hljs sh"><span class="hljs-comment"># 1. 下载关于Docker的依赖环境</span>
 
-<h2 id="二-PCRE-pcre-devel-安装"><a href="#二-PCRE-pcre-devel-安装" class="headerlink" title="二. PCRE pcre-devel 安装"></a><strong>二. PCRE pcre-devel 安装</strong></h2><p>PCRE(Perl Compatible  Regular Expressions) 是一个Perl库，包括 perl 兼容的正则表达式库。nginx 的 http 模块使用 pcre  来解析正则表达式，所以需要在 linux 上安装 pcre 库，pcre-devel 是使用 pcre  开发的一个二次开发库。nginx也需要此库。命令：</p>
-<pre><code class="hljs shell">yum install -y pcre pcre-devel</code></pre>
+yum -y install yum-utils device-mapper-persistent-data lvm2</code></pre>
 
-<h2 id="三-zlib-安装"><a href="#三-zlib-安装" class="headerlink" title="三. zlib 安装"></a><strong>三. zlib 安装</strong></h2><p>zlib 库提供了很多种压缩和解压缩的方式， nginx 使用 zlib 对 http 包的内容进行 gzip ，所以需要在 Centos 上安装 zlib 库。</p>
-<pre><code class="hljs nsis">yum install -y <span class="hljs-literal">zlib</span> <span class="hljs-literal">zlib</span>-devel</code></pre>
+<hr>
+<pre><code class="hljs sh">
 
-<h2 id="四-OpenSSL-安装"><a href="#四-OpenSSL-安装" class="headerlink" title="四. OpenSSL 安装"></a><strong>四. OpenSSL 安装</strong></h2><p>OpenSSL 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及 SSL 协议，并提供丰富的应用程序供测试或其它目的使用。<br>nginx 不仅支持 http 协议，还支持 https（即在ssl协议上传输http），所以需要在 Centos 安装 OpenSSL 库。</p>
-<pre><code class="hljs shell">yum install -y openssl openssl-devel</code></pre>
+<span class="hljs-comment"># 2. 设置一下下载Docker的镜像源</span>
 
-<h2 id="五-使用wget命令下载（推荐）。"><a href="#五-使用wget命令下载（推荐）。" class="headerlink" title="五. 使用wget命令下载（推荐）。"></a><strong>五. 使用<code>wget</code>命令下载（推荐）。</strong></h2><p>确保系统已经安装了wget，如果没有安装，执行 yum install wget 安装。</p>
-<p>也可直接去<a target="_blank" rel="noopener" href="http://nginx.org/">官网</a>下载（不推荐）。</p>
-<pre><code class="hljs shell">wget -c https://nginx.org/download/nginx-1.18.0.tar.gz</code></pre>
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</code></pre>
 
-<h2 id="六-解压"><a href="#六-解压" class="headerlink" title="六. 解压"></a><strong>六. 解压</strong></h2><pre><code class="hljs shell">tar -zxvf nginx-1.12.0.tar.gz
-cd nginx-1.12.0</code></pre>
+<hr>
+<pre><code class="hljs sh">
 
-<h2 id="七-配置"><a href="#七-配置" class="headerlink" title="七. 配置"></a><strong>七. 配置</strong></h2><p>使用默认配置：</p>
-<pre><code class="hljs shell">./configure</code></pre>
+<span class="hljs-comment"># 3. 安装Docker</span>
 
-<h2 id="八-编译安装"><a href="#八-编译安装" class="headerlink" title="八. 编译安装"></a><strong>八. 编译安装</strong></h2><pre><code class="hljs shell">make &amp;&amp; make install</code></pre>
+yum makecache fast
 
-<p>查找安装路径：</p>
-<pre><code class="hljs shell">whereis nginx</code></pre>
+yum -y install docker-ce</code></pre>
 
-<h2 id="九-启动和停止Nginx"><a href="#九-启动和停止Nginx" class="headerlink" title="九. 启动和停止Nginx"></a><strong>九. 启动和停止Nginx</strong></h2><pre><code class="hljs shell">cd /usr/local/nginx/sbin/
-./nginx 
-./nginx -s stop
-./nginx -s quit
-./nginx -s reload</code></pre>
+<hr>
+<pre><code class="hljs sh">
 
-<p>查询nginx进程：</p>
-<pre><code class="hljs shell">ps aux|grep nginx</code></pre>
+<span class="hljs-comment"># 4. 启动，并设置为开机自动启动，测试</span>
 
-<h2 id="十-重启Nginx"><a href="#十-重启Nginx" class="headerlink" title="十. 重启Nginx"></a><strong>十. 重启Nginx</strong></h2><p>先停止再启动（推荐）：<br>对 nginx 进行重启相当于先停止再启动，即先执行停止命令再执行启动命令。如下：</p>
-<pre><code class="hljs shell">./nginx -s quit
-./nginx</code></pre>
+<span class="hljs-comment"># 启动Docker服务</span>
 
-<p>重新加载配置文件：<br>当 nginx的配置文件 <code>nginx.conf</code> 修改后，要想让配置生效需要重启 nginx，使用<code>-s reload</code>不用先停止 nginx再启动 nginx 即可将配置信息在 nginx 中生效，如下：</p>
-<pre><code class="hljs shell">/nginx -s reload</code></pre>
+systemctl start docker
 
-<h2 id="十一-查看开放的端口号，打开端口"><a href="#十一-查看开放的端口号，打开端口" class="headerlink" title="十一. 查看开放的端口号，打开端口"></a><strong>十一. 查看开放的端口号，打开端口</strong></h2><p>查看开放的端口号 </p>
-<pre><code class="hljs shell">firewall-cmd --list-all</code></pre>
+<span class="hljs-comment"># 设置开机自动启动</span>
 
-<p>设置开放的端口号 </p>
-<pre><code class="hljs shell">firewall-cmd --add-service=http –permanent 
-sudo firewall-cmd --add-port=80/tcp --permanent</code></pre>
+systemctl <span class="hljs-built_in">enable</span> docker
 
-<p>重启防火墙 </p>
-<pre><code class="hljs shell">firewall-cmd –reload</code></pre>
+<span class="hljs-comment"># 测试</span>
 
-<h2 id="END-现在可以通过输入服务器ip-80看到Nginx的欢迎页面了"><a href="#END-现在可以通过输入服务器ip-80看到Nginx的欢迎页面了" class="headerlink" title="END. 现在可以通过输入服务器ip:80看到Nginx的欢迎页面了"></a><strong>END. 现在可以通过输入服务器ip:80看到Nginx的欢迎页面了</strong></h2>
+docker run hello-world</code></pre>
+
+<h4 id="1-2-Docker中央仓库"><a href="#1-2-Docker中央仓库" class="headerlink" title="1.2 Docker中央仓库"></a>1.2 Docker中央仓库</h4><blockquote>
+<ol>
+<li>Docker官方的中央仓库：这个仓库是镜像最全的，但是下载速度很慢。<a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com</a></li>
+<li>国内的镜像网站：网易蜂巢、daoCloud…</li>
+</ol>
+<p>​    <a target="_blank" rel="noopener" href="https://c.163yun.com/hub#/home">https://c.163yun.com/hub#/home</a></p>
+<p>​    <a target="_blank" rel="noopener" href="http://hub.daocloud.io/">http://hub.daocloud.io</a> (推荐使用)</p>
+<ol>
+<li>在公司内部会采用私服的方式拉取镜像。（添加配置）</li>
+</ol>
+</blockquote>
+<pre><code class="hljs json">
+
+# 需要在/etc/docker/daemon.json
+
+&#123;
+
+	<span class="hljs-attr">&quot;registry-mirrors&quot;</span>:[<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>],
+
+    <span class="hljs-attr">&quot;insecure-registries&quot;</span>:[<span class="hljs-string">&quot;ip:port&quot;</span>]
+
+&#125;
+
+# 重启两个服务
+
+systemctl daemon-reload
+
+systemctl restart docker</code></pre>
+
+<h4 id="1-3-镜像的操作"><a href="#1-3-镜像的操作" class="headerlink" title="1.3 镜像的操作"></a>1.3 镜像的操作</h4><pre><code class="hljs sh"><span class="hljs-comment"># 拉取镜像到本地</span>
+
+docker pull 镜像名称[:tag]
+
+<span class="hljs-comment"># 举个例子</span>
+
+docker pull tomcat daocloud.io/library/tomcat:8.5.15-jre8</code></pre>
+
+<hr>
+<pre><code class="hljs sh">
+
+<span class="hljs-comment"># 2. 查看全部本地的镜像</span>
+
+docker images</code></pre>
+
+<hr>
+<pre><code class="hljs shell">
+
+<span class="hljs-meta">#</span><span class="bash"> 3. 删除本地镜像</span>
+
+docker rmi 镜像的标识</code></pre>
+
+<hr>
+<pre><code class="hljs sh">
+
+<span class="hljs-comment"># 4. 镜像的导入导出（不规范）</span>
+
+<span class="hljs-comment"># 将本地的镜像导出</span>
+
+docker save -o 导出的路径 镜像id
+
+<span class="hljs-comment"># 加载本地的镜像文件</span>
+
+docker load -i 镜像文件
+
+<span class="hljs-comment"># 修改镜像名称</span>
+
+docker tag 镜像id 新镜像名称:版本</code></pre>
+
+<h4 id="1-4-容器的操作"><a href="#1-4-容器的操作" class="headerlink" title="1.4 容器的操作"></a>1.4 容器的操作</h4><pre><code class="hljs sh"><span class="hljs-comment"># 1. 运行容器</span>
+
+<span class="hljs-comment"># 简单操作</span>
+
+docker run 镜像的标识|镜像名称[:tag]
+
+<span class="hljs-comment"># 常用的参数</span>
+
+docker run -d -p 宿主机端口:容器端口 --name 容器名称 镜像的标识|镜像名称[:tag]
+
+<span class="hljs-comment"># -d：代表后台运行容器</span>
+
+<span class="hljs-comment"># -p 宿主机端口:容器端口：为了映射当前Linux端口和容器端口</span>
+
+<span class="hljs-comment"># --name 容器名称：指定容器的名称</span></code></pre>
+
+<hr>
+<pre><code class="hljs sh">
+
+<span class="hljs-comment"># 2. 查看正在运行的容器</span>
+
+docker ps [-qa]
+
+<span class="hljs-comment"># -a：查看全部的容器，包括没有运行</span>
+
+<span class="hljs-comment"># -p：只查看容器得到标识</span></code></pre>
+
+<pre><code class="hljs sh"><span class="hljs-comment"># 3. 查看容器的日志</span>
+
+docker logs -f 容器id
+
+<span class="hljs-comment"># -f：可以滚动查看日志的最后几行</span></code></pre>
+
+<hr>
+<pre><code class="hljs sh">
+
+<span class="hljs-comment"># 4. 进入到容器内部</span>
+
+docker <span class="hljs-built_in">exec</span> -it 容器id bash</code></pre>
+
+<hr>
+<pre><code class="hljs sh">
+
+<span class="hljs-comment"># 5. 删除容器（删除容器前，需要停止容器）</span>
+
+<span class="hljs-comment"># 停止指定的容器</span>
+
+docker stop 容器id
+
+<span class="hljs-comment"># 停止全部容器</span>
+
+docker stop $(docker pa -qa)
+
+<span class="hljs-comment"># 删除指定的容器</span>
+
+docker rm 容器id
+
+<span class="hljs-comment"># 删除全部容器</span>
+
+docker rm $(docker pa -qa)</code></pre>
+
+<hr>
+<pre><code class="hljs sh">
+
+<span class="hljs-comment"># 6. 启动容器</span>
+
+docker start 容器id</code></pre>
+
+<h3 id="二-Docker应用"><a href="#二-Docker应用" class="headerlink" title="二.Docker应用"></a>二.Docker应用</h3><h3 id="三-Docker自定义镜像"><a href="#三-Docker自定义镜像" class="headerlink" title="三.Docker自定义镜像"></a>三.Docker自定义镜像</h3><h3 id="四-Docker-compose"><a href="#四-Docker-compose" class="headerlink" title="四.Docker-compose"></a>四.Docker-compose</h3>
             </div>
             <hr>
             <div>
@@ -276,9 +396,13 @@ sudo firewall-cmd --add-port=80/tcp --permanent</code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/">Linux软件安装</a>
+                      <a class="hover-with-bg" href="/categories/java/">java</a>
                     
-                      <a class="hover-with-bg" href="/categories/Linux%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/Nginx%E5%9C%A8CentOS%E7%9A%84%E5%AE%89%E8%A3%85/">Nginx在CentOS的安装</a>
+                      <a class="hover-with-bg" href="/categories/Linux%E8%BD%AF%E4%BB%B6/">Linux软件</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux%E8%BD%AF%E4%BB%B6/Docker/">Docker</a>
+                    
+                      <a class="hover-with-bg" href="/categories/java/Docker/">Docker</a>
                     
                   </div>
                 
@@ -286,7 +410,7 @@ sudo firewall-cmd --add-port=80/tcp --permanent</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
                     
                   </div>
                 
@@ -299,18 +423,12 @@ sudo firewall-cmd --add-port=80/tcp --permanent</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/30/Docker%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Docker基本使用</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/11/23/jvm%E5%AD%A6%E4%B9%A0/">
-                        <span class="hidden-mobile">jvm学习</span>
+                      <a href="/2020/11/23/Nginx%E7%9A%84%E5%AE%89%E8%A3%85/">
+                        <span class="hidden-mobile">Nginx的安装</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -453,7 +571,7 @@ sudo firewall-cmd --add-port=80/tcp --permanent</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Nginx的安装&nbsp;",
+        "Docker基本使用&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
