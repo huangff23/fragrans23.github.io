@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      654 字
+      2.1k 字
     </span>
   
 
@@ -212,6 +212,7 @@
             
             <div class="markdown-body" id="post-body">
               <p>Linux安装Docker及Docker基本使用，B站链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1sK4y1s7Cj?p=15">https://www.bilibili.com/video/BV1sK4y1s7Cj?p=15</a> 。</p>
+<p>其他视频博客: <a target="_blank" rel="noopener" href="https://www.lixian.fun/3812.html#title-0">https://www.lixian.fun/3812.html#title-0</a> , <a target="_blank" rel="noopener" href="https://www.cnblogs.com/eden-libinglin/p/13803729.html#%E4%B8%80-docker%E4%BB%8B%E7%BB%8D">https://www.cnblogs.com/eden-libinglin/p/13803729.html#%E4%B8%80-docker%E4%BB%8B%E7%BB%8D</a> 。</p>
 <a id="more"></a>
 
 <h3 id="一-Docker的基本操作"><a href="#一-Docker的基本操作" class="headerlink" title="一.Docker的基本操作"></a>一.Docker的基本操作</h3><h4 id="1-1-安装Docker"><a href="#1-1-安装Docker" class="headerlink" title="1.1 安装Docker"></a>1.1 安装Docker</h4><pre><code class="hljs sh"><span class="hljs-comment"># 1. 下载关于Docker的依赖环境</span>
@@ -219,25 +220,19 @@
 yum -y install yum-utils device-mapper-persistent-data lvm2</code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 2. 设置一下下载Docker的镜像源</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 2. 设置一下下载Docker的镜像源</span>
 
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 3. 安装Docker</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 3. 安装Docker</span>
 
 yum makecache fast
 
 yum -y install docker-ce</code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 4. 启动，并设置为开机自动启动，测试</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 4. 启动，并设置为开机自动启动，测试</span>
 
 <span class="hljs-comment"># 启动Docker服务</span>
 
@@ -262,9 +257,7 @@ docker run hello-world</code></pre>
 <li>在公司内部会采用私服的方式拉取镜像。（添加配置）</li>
 </ol>
 </blockquote>
-<pre><code class="hljs json">
-
-# 需要在/etc/docker/daemon.json
+<pre><code class="hljs json"># 需要在/etc/docker/daemon.json
 
 &#123;
 
@@ -289,23 +282,17 @@ docker pull 镜像名称[:tag]
 docker pull tomcat daocloud.io/library/tomcat:8.5.15-jre8</code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 2. 查看全部本地的镜像</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 2. 查看全部本地的镜像</span>
 
 docker images</code></pre>
 
 <hr>
-<pre><code class="hljs shell">
-
-<span class="hljs-meta">#</span><span class="bash"> 3. 删除本地镜像</span>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 3. 删除本地镜像</span>
 
 docker rmi 镜像的标识</code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 4. 镜像的导入导出（不规范）</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 4. 镜像的导入导出（不规范）</span>
 
 <span class="hljs-comment"># 将本地的镜像导出</span>
 
@@ -336,9 +323,7 @@ docker run -d -p 宿主机端口:容器端口 --name 容器名称 镜像的标�
 <span class="hljs-comment"># --name 容器名称：指定容器的名称</span></code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 2. 查看正在运行的容器</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 2. 查看正在运行的容器</span>
 
 docker ps [-qa]
 
@@ -353,16 +338,12 @@ docker logs -f 容器id
 <span class="hljs-comment"># -f：可以滚动查看日志的最后几行</span></code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 4. 进入到容器内部</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 4. 进入到容器内部</span>
 
 docker <span class="hljs-built_in">exec</span> -it 容器id bash</code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 5. 删除容器（删除容器前，需要停止容器）</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 5. 删除容器（删除容器前，需要停止容器）</span>
 
 <span class="hljs-comment"># 停止指定的容器</span>
 
@@ -381,13 +362,260 @@ docker rm 容器id
 docker rm $(docker pa -qa)</code></pre>
 
 <hr>
-<pre><code class="hljs sh">
-
-<span class="hljs-comment"># 6. 启动容器</span>
+<pre><code class="hljs sh"><span class="hljs-comment"># 6. 启动容器</span>
 
 docker start 容器id</code></pre>
 
-<h3 id="二-Docker应用"><a href="#二-Docker应用" class="headerlink" title="二.Docker应用"></a>二.Docker应用</h3><h3 id="三-Docker自定义镜像"><a href="#三-Docker自定义镜像" class="headerlink" title="三.Docker自定义镜像"></a>三.Docker自定义镜像</h3><h3 id="四-Docker-compose"><a href="#四-Docker-compose" class="headerlink" title="四.Docker-compose"></a>四.Docker-compose</h3>
+<h3 id="二-Docker应用"><a href="#二-Docker应用" class="headerlink" title="二.Docker应用"></a>二.Docker应用</h3><h4 id="2-1准备java工程"><a href="#2-1准备java工程" class="headerlink" title="2.1准备java工程"></a>2.1准备java工程</h4><pre><code class="hljs properties"><span class="hljs-comment">#准备一个java工程</span>
+<span class="hljs-comment"># MySQL数据库的连接用户名和密码改变了，修改db.properties</span></code></pre>
+
+<h4 id="3-2-准备MySQL容器"><a href="#3-2-准备MySQL容器" class="headerlink" title="3.2 准备MySQL容器"></a>3.2 准备MySQL容器</h4><pre><code class="hljs sh"><span class="hljs-comment"># 运行MySQL容器</span>
+
+docker run -d -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=root daocloud.io/library/mysql:5.7.4</code></pre>
+
+<h4 id="3-3-准备Tomcat容器"><a href="#3-3-准备Tomcat容器" class="headerlink" title="3.3 准备Tomcat容器"></a>3.3 准备Tomcat容器</h4><pre><code class="hljs sh"><span class="hljs-comment"># 运行Tomcat容器，前面已经搞定，只需要将SSM项目的war包部署到Tomcat容器内部即可</span>
+
+<span class="hljs-comment"># 可以通过命令将宿主机的内容服务到容器内部</span>
+
+docker cp 文件名称 容器id:容器内部路径
+
+<span class="hljs-comment"># 举个例子</span>
+
+docker cp ssm.war fe:/usr/<span class="hljs-built_in">local</span>/tomcat/webapps</code></pre>
+
+<h4 id="3-4-数据卷"><a href="#3-4-数据卷" class="headerlink" title="3.4 数据卷"></a>3.4 数据卷</h4><blockquote>
+<p>为了部署SSM的工程，需要使用到cp命令将宿主机内的ssm.war文件复制到容器内部。</p>
+<p>数据卷：将宿主机的一个目录映射到容器的一个目录中。</p>
+<p>可以在宿主机中操作目录中的内容，那么容器内部映射的文件，也会跟着一起改变。</p>
+</blockquote>
+<pre><code class="hljs sh"><span class="hljs-comment"># 1. 创建数据卷</span>
+
+docker volume create 数据卷名称
+
+<span class="hljs-comment"># 创建数据卷之后，默认会存放在一个目录下 /war/lib/docker/volumes/数据卷名称/_data</span></code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 2. 查看数据卷的详细信息</span>
+
+docker volume inspect 数据卷名称</code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 3. 查看全部数据卷</span>
+
+docker volume ls</code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 4. 删除数据卷</span>
+
+docker volume rm 数据卷名称</code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 5. 应用数据卷</span>
+
+<span class="hljs-comment"># 当你映射数据卷时，如果数据卷不存在，Docker会自动帮你创建，会将容器内部自带的文件，存储在默认的存放路径中</span>
+
+docker run -v 数据卷名称:容器内部的路径 镜像id
+
+<span class="hljs-comment"># 直接指定一个路径作为数据卷的存放位置，这个路径下是空的。</span>
+
+docker run -v 路径:容器内部的路径 镜像id</code></pre>
+
+<h3 id="三-Docker自定义镜像"><a href="#三-Docker自定义镜像" class="headerlink" title="三.Docker自定义镜像"></a>三.Docker自定义镜像</h3><blockquote>
+<p>​    中央仓库上的镜像，也是Docker的用户自己上传过去的。</p>
+</blockquote>
+<pre><code class="hljs sh"><span class="hljs-comment"># 1. 创建一个Dockerfile文件，并且指定自定义镜像信息</span>
+
+<span class="hljs-comment"># Dockerfile文件中常用的内容</span>
+
+from：指定当前自定义镜像依赖的环境
+
+copy：将相对路径下的内容复制到自定义镜像中
+
+workdir：声明镜像的默认工作目录
+
+cmd：需要执行的命令（在workdir下执行的，cmd可以写多的，只以最后一个为准）
+
+<span class="hljs-comment"># 举个例子，自定义一个Tomcat镜像，并且将ssm.war部署到Tomcat中</span>
+
+from daocloud.io/library/tomcat:8.5.15-jre8
+
+copy ssm.war /usr/<span class="hljs-built_in">local</span>/tomcat/webapps</code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 2. 将准备好的Dockerfile和相应的文件拖拽到Linux操作系统中，通过Docker的命令制作镜像</span>
+
+docker build -t 镜像名称:[tag]</code></pre>
+
+<h3 id="四-Docker-compose"><a href="#四-Docker-compose" class="headerlink" title="四.Docker-compose"></a>四.Docker-compose</h3><blockquote>
+<p>之前运行一个镜像，需要添加大量的参数。</p>
+<p>可以通过Docker-Compose编写这些参数。</p>
+<p>Docker-Compose可以帮助我们批量的管理容器。</p>
+<p>只需要通过一个docker-compose.yml文件去维护即可。</p>
+</blockquote>
+<h4 id="4-1-下载Docker-Compose"><a href="#4-1-下载Docker-Compose" class="headerlink" title="4.1 下载Docker-Compose"></a>4.1 下载Docker-Compose</h4><pre><code class="hljs sh"><span class="hljs-comment"># 1. 去GitHub官网搜索docker-compose，下载最新版本的Docker-Compose</span>
+
+<span class="hljs-comment"># 2. 将下载好的文件，拖拽到Linux操作系统中</span>
+
+<span class="hljs-comment"># 3. 需要将Docker-Compose文件名称修改一下，给予DockerCompose文件一个可执行的权限</span>
+
+mv docker-compose-Linux-x86_64 docker-compose
+
+chmod 777 docker-compose
+
+<span class="hljs-comment"># 4. 方便后期操作，配置一个环境变量</span>
+
+<span class="hljs-comment"># 将docker-compose文件移动到/usr/local/bin，修改了/etc/profile文件，给/usr/local/bin配置到PATH中</span>
+
+mv docker-compose /usr/<span class="hljs-built_in">local</span>/bin
+
+vi /etc/profile
+
+	<span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>:/usr/<span class="hljs-built_in">local</span>/bin:<span class="hljs-variable">$PATH</span>
+
+<span class="hljs-built_in">source</span> /etc/profile
+
+ 
+
+<span class="hljs-comment"># 5. 测试一下</span>
+
+<span class="hljs-comment"># 在任意目录下输入docker-compose</span></code></pre>
+
+<h4 id="4-2-Docker-Compose管理MySQL和Tomcat容器"><a href="#4-2-Docker-Compose管理MySQL和Tomcat容器" class="headerlink" title="4.2 Docker-Compose管理MySQL和Tomcat容器"></a>4.2 Docker-Compose管理MySQL和Tomcat容器</h4><blockquote>
+<p>​    yml文件以key:value方式指定配置信息</p>
+<p>​    多个配置信息以换行+缩进的方式来区分</p>
+<p>​    在docker-compose.yml文件中，不要使用制表符</p>
+</blockquote>
+<pre><code class="hljs yml"><span class="hljs-string">version:&#x27;3.1&#x27;</span>
+
+<span class="hljs-attr">services:</span>
+
+  <span class="hljs-attr">mysql:</span>                     <span class="hljs-comment"># 服务的名称</span>
+
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>          <span class="hljs-comment"># 代表只要Docker启动，那么这个容器就跟着一起启动</span>
+
+    <span class="hljs-attr">image:</span> <span class="hljs-string">daocloud.io/library/mysql:5.7.4</span>     <span class="hljs-comment"># 指定镜像路径</span>
+
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">mysql</span>    <span class="hljs-comment"># 指定容器名称</span>
+
+    <span class="hljs-attr">ports:</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-number">3306</span><span class="hljs-string">:3306</span>        <span class="hljs-comment"># 指定端口号的映射</span>
+
+    <span class="hljs-attr">environment:</span>
+
+      <span class="hljs-attr">MYSQL_ROOT_PASSWORD:</span> <span class="hljs-string">root</span>         <span class="hljs-comment"># 指定MySQL的ROOT用户登录密码</span>
+
+      <span class="hljs-attr">TZ:</span> <span class="hljs-string">Asia/Shanghai</span>                 <span class="hljs-comment"># 指定时区</span>
+
+    <span class="hljs-attr">volumes:</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/docker_mysql-tomcat/mysql_data:/var/lib/mysql</span>        <span class="hljs-comment"># 映射数据卷</span>
+
+  <span class="hljs-attr">tomcat:</span>
+
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>          <span class="hljs-comment"># 代表只要Docker启动，那么这个容器就跟着一起启动</span>
+
+    <span class="hljs-attr">image:</span> <span class="hljs-string">daocloud.io/library/tomcat:8.5.15-jre8</span>     <span class="hljs-comment"># 指定镜像路径</span>
+
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">tomcat</span>    <span class="hljs-comment"># 指定容器名称</span>
+
+    <span class="hljs-attr">ports:</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-number">8080</span><span class="hljs-string">:8080</span>        <span class="hljs-comment"># 指定端口号的映射</span>
+
+    <span class="hljs-attr">environment:</span>
+
+      <span class="hljs-attr">MYSQL_ROOT_PASSWORD:</span> <span class="hljs-string">root</span>         <span class="hljs-comment"># 指定MySQL的ROOT用户登录密码</span>
+
+      <span class="hljs-attr">TZ:</span> <span class="hljs-string">Asia/Shanghai</span>                 <span class="hljs-comment"># 指定时区</span>
+
+    <span class="hljs-attr">volumes:</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/docker_mysql-tomcat/tomcat_webapps:/usr/local/tomcat/webapps</span>        <span class="hljs-comment"># 映射数据卷</span>
+
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/docker_mysql-tomcat/tomcat_logs:/usr/local/tomcat/logs</span>        <span class="hljs-comment"># 映射数据卷</span></code></pre>
+
+<h4 id="4-3-使用Docker-Compose命令管理容器"><a href="#4-3-使用Docker-Compose命令管理容器" class="headerlink" title="4.3 使用Docker-Compose命令管理容器"></a>4.3 使用Docker-Compose命令管理容器</h4><blockquote>
+<p>​    在使用docker-compose的命令时，默认会在当前目录下找docker-compose.yml文件</p>
+</blockquote>
+<pre><code class="hljs sh"><span class="hljs-comment"># 1. 基于docker-compose.yml启动管理的容器</span>
+
+docker-compose up -d</code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 2. 关闭并删除容器</span>
+
+docker-compose down</code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 3. 开启|关闭|重启已经存在的由docker-compose维护的容器</span>
+
+docker-compose start|stop|restart</code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 4. 查看由docker-compose管理的容器</span>
+
+docker-compose ps</code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 5. 查看日志</span>
+
+docker-compose logs -f</code></pre>
+
+<h4 id="4-4-docker-compose配置Dockerfile使用"><a href="#4-4-docker-compose配置Dockerfile使用" class="headerlink" title="4.4 docker-compose配置Dockerfile使用"></a>4.4 docker-compose配置Dockerfile使用</h4><blockquote>
+<p>​    使用docker-compose.yml文件以及Dockerfile文件在生成自定义镜像的同时启动当前镜像，并且由docker-compose去管理容器</p>
+</blockquote>
+<h5 id="4-4-1-docker-compose-yml"><a href="#4-4-1-docker-compose-yml" class="headerlink" title="4.4.1 docker-compose.yml"></a>4.4.1 docker-compose.yml</h5><pre><code class="hljs yml"><span class="hljs-comment"># yml文件</span>
+
+<span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.1&#x27;</span>
+
+<span class="hljs-attr">services:</span>
+
+  <span class="hljs-attr">ssm:</span>
+
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
+
+    <span class="hljs-attr">build:</span>                           <span class="hljs-comment"># 构建自定义镜像</span>
+
+      <span class="hljs-attr">context:</span> <span class="hljs-string">../</span>                   <span class="hljs-comment"># 指定Dockerfile文件所在路径</span>
+
+      <span class="hljs-attr">dockerfile:</span> <span class="hljs-string">Dockerfile</span>         <span class="hljs-comment"># 指定Dockerfile文件名称</span>
+
+    <span class="hljs-attr">image:</span> <span class="hljs-string">ssm:1.0.1</span>
+
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">ssm</span>
+
+    <span class="hljs-attr">ports:</span>
+
+      <span class="hljs-number">8081</span><span class="hljs-string">:8080</span>
+
+    <span class="hljs-attr">environment:</span>
+
+      <span class="hljs-attr">TZ:</span> <span class="hljs-string">Asia/Shanghai</span></code></pre>
+
+<hr>
+<h5 id="4-4-2-Dockerfile文件"><a href="#4-4-2-Dockerfile文件" class="headerlink" title="4.4.2 Dockerfile文件"></a>4.4.2 Dockerfile文件</h5><pre><code class="hljs dockerfile"><span class="hljs-keyword">from</span> daocloud.io/library/tomcat:<span class="hljs-number">8.5</span>.<span class="hljs-number">15</span>-jre8
+
+<span class="hljs-keyword">copy</span><span class="bash"> ssm.war /usr/<span class="hljs-built_in">local</span>/tomcat/webapps</span></code></pre>
+
+<hr>
+<pre><code class="hljs sh"><span class="hljs-comment"># 可以直接启动基于docker-compose.yml以及Dockerfile文件构建的自定义镜像</span>
+
+docker-compose up -d
+
+<span class="hljs-comment"># 如果自定义镜像不存在，会帮助我们构建出自定义镜像，如果自定义镜像已经存在，会直接运行这个自定义镜像</span>
+
+<span class="hljs-comment"># 重新构建的话</span>
+
+<span class="hljs-comment"># 重新构建自定义镜像</span>
+
+docker-compose build
+
+<span class="hljs-comment"># 运行前，重新构建</span>
+
+docker-compose up -d --build</code></pre>
+
+
             </div>
             <hr>
             <div>
